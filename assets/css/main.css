@@ -175,6 +175,27 @@ input, select, textarea {
 		font-style: italic;
 	}
 
+	#countdown {
+		display: flex;
+		gap: 20px;
+		font-size: 2rem;
+		text-align: center;
+	  }
+  
+	  .time-box {
+		background: #222;
+		padding: 20px;
+		border-radius: 12px;
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+		color: white;
+	  }
+  
+	  .label {
+		font-size: 0.8rem;
+		margin-top: 5px;
+		color: #aaa;
+	  }
+	  
 	p {
 		text-align: justify;
 		margin: 0 0 2rem 0;
