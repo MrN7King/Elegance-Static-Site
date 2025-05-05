@@ -175,6 +175,32 @@ input, select, textarea {
 		font-style: italic;
 	}
 
+	#countdown {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		font-size: 2.5rem;
+		text-align: center;
+	  }
+  
+	  .time-box {
+		background: #222;
+		padding: 10px;
+		border-radius: 12px;
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+		color: white;
+		width: 100px;
+		height: 150px;
+	  }
+  
+	  .label {
+		font-size: 1.3rem;
+		margin-top: 5px;
+		color: #aaa;
+	  }
+
+	  
+	  
 	p {
 		text-align: justify;
 		margin: 0 0 2rem 0;
@@ -4687,3 +4713,34 @@ input, select, textarea {
 		}
 
 	}
+
+	/* Mobile & Tablet Adjustments */
+	@media screen and (max-width: 1440px) {
+		#countdown {
+		  display: flex;
+		  flex-wrap: wrap; /* Allows wrapping on smaller widths if needed */
+		  justify-content: center;
+		  gap: 1em;
+		  width: 100%;
+		  max-width: 100%;
+		}
+	  
+		.time-box {
+		  flex: 1 1 150px; /* Grow, shrink, and minimum width */
+		  text-align: center;
+		  background: #222;
+		  padding: 20px;
+		  border-radius: 12px;
+		  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+		  color: white;
+		  min-width: 120px; /* Ensures the boxes don't shrink too much */
+		}
+	  
+		.label {
+		  font-size: 0.8rem;
+		  margin-top: 5px;
+		  color: #aaa;
+		}
+	}	  
+
+  
