@@ -6,7 +6,7 @@
 -->
 <html style=" scroll-behavior: smooth; ">
 	<head>
-		<title>Massively by HTML5 UP</title>
+		<title>OilLampWebsite</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -50,7 +50,7 @@
 							</article>
 							
 						
-						<h2 style="justify-self: center;">Light Up Your Curiosity</h2>
+						<h2 style="justify-self: center; text-align: center;">Light Up Your Curiosity</h2>
 							<section class="posts">																
                                 <!-- Posts -->
 								<article>
@@ -93,7 +93,7 @@
 						
 
 						 <!--timer-->
-						<h2 style="justify-self: center;">Website Launches In</h2>
+						<h2 style="justify-self: center; text-align: center;">Website Launches In</h2>
 						<div id="countdown">
 							<div class="time-box"><div id="months">0</div><div class="label">Months</div></div>
 							<div class="time-box"><div id="days">0</div><div class="label">Days</div></div>
@@ -107,25 +107,27 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<form method="post" action="#">
+							<form id="emailForm">
 								<div class="fields">
 									<div class="field">
 										<div>
-											<h2 style="justify-content: center;">Subscribe to newsletter</h2>
+											<h2 style="justify-content: center; text-align: center;">Subscribe to newsletter</h2>
 										</div>
 										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
+										<input type="email" name="email" id="email" required />
 									</div>
 								</div>
 								<ul class="actions">
 									<li><input type="submit" value="Subscribe" /></li>
 								</ul>
+								<div id="formMessage" style="display:none; margin-top: 20px;"></div>
+								<Button class="button"><a href="admin.html">goto Admin Panel (temperary link)</a></Button>
 							</form>
 						</section>
 						<section class="split contact">
 							
 							<section class="alt">
-								<h2>Contact Us</h2>
+								<h2 style=" text-align: center;">Contact Us</h2>
 							</section>
 							<section>
 								<h3>Email</h3>
@@ -145,7 +147,10 @@
 
 				<!-- Copyright -->
 					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+						<ul>
+							<li style="color:#000000;">&copy; Untitled</li>
+							<li style="color:#000000;">Design: <a href="https://html5up.net">HTML5 UP</a></li>
+						</ul>
 					</div>
 
 			</div>
@@ -187,6 +192,64 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+			<script type="module">
+				// Import the functions you need from the Firebase SDK
+				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+				import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+				// Your web app's Firebase configuration
+				const firebaseConfig = {
+					apiKey: "AIzaSyCDGVmZwmJ4m-JicDa-bXEma9sp8bo9Uos",
+					authDomain: "oillampnewsletterapp.firebaseapp.com",
+					databaseURL: "https://oillampnewsletterapp-default-rtdb.asia-southeast1.firebasedatabase.app",
+					projectId: "oillampnewsletterapp",
+					storageBucket: "oillampnewsletterapp.firebasestorage.app",
+					messagingSenderId: "435713516292",
+					appId: "1:435713516292:web:f0a18ac7f61d61bbc02651",
+					measurementId: "G-5J5BPKEP7W"
+				};
+
+				// Initialize Firebase
+				const app = initializeApp(firebaseConfig);
+				const database = getDatabase(app);
+
+				// Handle form submission
+				document.getElementById('emailForm').addEventListener('submit', function (e) {
+					e.preventDefault();
+
+					const email = document.getElementById('email').value;
+					const timestamp = new Date().toISOString();
+
+					// Save to Firebase
+					push(ref(database, 'subscribers'), {
+						email: email,
+						date: timestamp
+					})
+						.then(() => {
+							// Show success message
+							const messageDiv = document.getElementById('formMessage');
+							messageDiv.textContent = 'Thank you for subscribing!';
+							messageDiv.style.color = 'green';
+							messageDiv.style.display = 'block';
+
+							// Clear the form
+							document.getElementById('emailForm').reset();
+
+							// Hide message after 5 seconds
+							setTimeout(() => {
+								messageDiv.style.display = 'none';
+							}, 5000);
+						})
+						.catch((error) => {
+							// Show error message
+							const messageDiv = document.getElementById('formMessage');
+							messageDiv.textContent = 'Error: ' + error.message;
+							messageDiv.style.color = 'red';
+							messageDiv.style.display = 'block';
+						});
+				});
+			</script>  
 
 	</body>
 </html>
