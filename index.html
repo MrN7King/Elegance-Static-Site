@@ -155,101 +155,120 @@
 
 			</div>
 
-		<!-- Scripts -->
-		    <!-- Counter Scripts -->
-		    <script>
-			const launchDate = new Date("2025-09-01T00:00:00"); // Set your launch date here
+	<!-- Scripts -->
+<!-- Counter Scripts -->
+<script>
+  const launchDate = new Date("2025-09-01T00:00:00"); // Set your launch date here
 
-			function updateCountdown() {
-			const now = new Date();
-			const totalSeconds = Math.floor((launchDate - now) / 1000);
+  function updateCountdown() {
+    const now = new Date();
+    const totalSeconds = Math.floor((launchDate - now) / 1000);
 
-			if (totalSeconds < 0) {
-				document.getElementById("countdown").innerHTML = "We're live!";
-				return;
-			}
+    if (totalSeconds < 0) {
+      document.getElementById("countdown").innerHTML = "We're live!";
+      return;
+    }
 
-			const seconds = totalSeconds % 60;
-			const minutes = Math.floor((totalSeconds / 60) % 60);
-			const hours = Math.floor((totalSeconds / 3600) % 24);
-			const days = Math.floor((totalSeconds / 86400) % 30);
-			const months = Math.floor(totalSeconds / (86400 * 30));
+    const seconds = totalSeconds % 60;
+    const minutes = Math.floor((totalSeconds / 60) % 60);
+    const hours = Math.floor((totalSeconds / 3600) % 24);
+    const days = Math.floor((totalSeconds / 86400) % 30);
+    const months = Math.floor(totalSeconds / (86400 * 30));
 
-			document.getElementById("months").textContent = months;
-			document.getElementById("days").textContent = days;
-			document.getElementById("hours").textContent = hours;
-			document.getElementById("minutes").textContent = minutes;
-			document.getElementById("seconds").textContent = seconds;
-			}
+    document.getElementById("months").textContent = months;
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  }
 
-			updateCountdown();
-			setInterval(updateCountdown, 1000);
-		    </script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			
-			<script type="module">
-				// Import the functions you need from the Firebase SDK
-				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-				import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 
-				// Your web app's Firebase configuration
-				const firebaseConfig = {
-					apiKey: "AIzaSyCDGVmZwmJ4m-JicDa-bXEma9sp8bo9Uos",
-					authDomain: "oillampnewsletterapp.firebaseapp.com",
-					databaseURL: "https://oillampnewsletterapp-default-rtdb.asia-southeast1.firebasedatabase.app",
-					projectId: "oillampnewsletterapp",
-					storageBucket: "oillampnewsletterapp.firebasestorage.app",
-					messagingSenderId: "435713516292",
-					appId: "1:435713516292:web:f0a18ac7f61d61bbc02651",
-					measurementId: "G-5J5BPKEP7W"
-				};
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
-				// Initialize Firebase
-				const app = initializeApp(firebaseConfig);
-				const database = getDatabase(app);
+<script type="module">
+  // Import the functions you need from the Firebase SDK
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
-				// Handle form submission
-				document.getElementById('emailForm').addEventListener('submit', function (e) {
-					e.preventDefault();
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCDGVmZwmJ4m-JicDa-bXEma9sp8bo9Uos",
+    authDomain: "oillampnewsletterapp.firebaseapp.com",
+    databaseURL: "https://oillampnewsletterapp-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "oillampnewsletterapp",
+    storageBucket: "oillampnewsletterapp.firebasestorage.app",
+    messagingSenderId: "435713516292",
+    appId: "1:435713516292:web:f0a18ac7f61d61bbc02651",
+    measurementId: "G-5J5BPKEP7W"
+  };
 
-					const email = document.getElementById('email').value;
-					const timestamp = new Date().toISOString();
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
 
-					// Save to Firebase
-					push(ref(database, 'subscribers'), {
-						email: email,
-						date: timestamp
-					})
-						.then(() => {
-							// Show success message
-							const messageDiv = document.getElementById('formMessage');
-							messageDiv.textContent = 'Thank you for subscribing!';
-							messageDiv.style.color = 'green';
-							messageDiv.style.display = 'block';
+  // Handle form submission
+  document.getElementById('emailForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-							// Clear the form
-							document.getElementById('emailForm').reset();
+    const email = document.getElementById('email').value;
+    const timestamp = new Date().toISOString();
 
-							// Hide message after 5 seconds
-							setTimeout(() => {
-								messageDiv.style.display = 'none';
-							}, 5000);
-						})
-						.catch((error) => {
-							// Show error message
-							const messageDiv = document.getElementById('formMessage');
-							messageDiv.textContent = 'Error: ' + error.message;
-							messageDiv.style.color = 'red';
-							messageDiv.style.display = 'block';
-						});
-				});
-			</script>  
+    // Save to Firebase
+    push(ref(database, 'subscribers'), {
+      email: email,
+      date: timestamp
+    })
+      .then(() => {
+        // Show success message
+        const messageDiv = document.getElementById('formMessage');
+        messageDiv.textContent = 'Thank you for subscribing!';
+        messageDiv.style.color = 'green';
+        messageDiv.style.display = 'block';
+
+        // Clear the form
+        document.getElementById('emailForm').reset();
+
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          messageDiv.style.display = 'none';
+        }, 5000);
+      })
+      .catch((error) => {
+        // Show error message
+        const messageDiv = document.getElementById('formMessage');
+        messageDiv.textContent = 'Error: ' + error.message;
+        messageDiv.style.color = 'red';
+        messageDiv.style.display = 'block';
+      });
+
+    // Send the email to the backend for processing
+    fetch('http://localhost:3000/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email }) // Send email data to backend
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Email send status:', data.message);
+    })
+    .catch(error => {
+      console.error('Error sending email:', error);
+    });
+
+  });
+</script>
+
 
 	</body>
 </html>
